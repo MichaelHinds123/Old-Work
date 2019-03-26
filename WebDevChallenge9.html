@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<!-- 
+    Name: Michael Hinds
+    Pawprint: meh2p4
+    Date: 11/5/17
+-->
+
+
+
+<html lang="en">
+
+    <head>
+        <title>Challenge 9></title>
+        <meta charset="UTF-8">
+        <link href="meh2p4NinthChallenge.css" rel="stylesheet" type="text/css">
+            <script>
+
+                function getContent(){
+                    
+                var xmlHttp = new XMLHttpRequest();
+                    
+                    xmlHttp.onreadystatechange = function(){
+                        
+                    if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+                    
+                    //Get response text
+                    var response = xmlHttp.responseText;
+                    
+                    //Get the paragraph object
+                    var contentBox = document.getElementById("contentBox");
+                    
+                    //Set #contentBox's innerhtml to the response from the server
+                    contentBox.innerHTML = response;
+                       
+                        }
+                    }
+                }
+
+                function getPokeType(){
+                    
+                    var xmlHttp = new XMLHttpsRequest();
+                    
+                    xmlHttp.onload = function(){
+                        if(xmlHttp.status==200){
+                            var xmlDoc = xmlHttp.responseXML;
+                            var output = "";
+                            var names = xmlDoc.getElementById("name");
+                            var titles = xmlDoc.getElementById("titles");
+                            
+                            for(var i=0; i<titles.length; i++){
+                                output += names[i].childNodes[0].nodeValue + " is of type: " + names[i].childNodes[0].nodeValue = "<br>";
+                            }
+                        }
+                    }
+                    
+                    xmlHttp.open("GET", "http://ec2-34-226-140-164.compute-1.amazonaws.com/PublicChallenges/Challenge9/webService.php?content=data&format=xml", true);
+                    xmlHttp.send();
+                }
+        
+                
+                document.getElementById("contentBox").innerHTML = "Loading..";
+
+                //Specifying the type of request (GET/POST/ect.) and where it is going
+                xmlHttp.open("GET", "respond.php", true);
+
+                //Sending the AJAX request
+                xmlHttp.send();
+
+
+            </script>
+    </head>
+
+
+
+<body>
+    
+    <h1>Challenge 9</h1>
+    
+</body>
+
+
+</html>
