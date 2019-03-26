@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<!-- meh2p4
+     10/26/17
+     cs2830
+     Challenge 8
+     Webdev class
+-->
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <title>Challenge 8</title>
+
+        <style>
+            img{
+                height: 500px;
+                width: 800px;
+            }    
+        </style>
+           
+    </head>
+
+
+    <body>
+    
+        <?php
+        
+            $path = pathinfo('images/');
+        
+            $images = 'images/'; // Location of the images folder
+        
+        
+            // Error check on the directory existing 
+            if(file_exists($images)){
+                echo "The folder $images exists <br>";
+            }
+            
+            else{
+                echo "The folder $images does not exist <br>";
+            }
+        
+        
+            // Displays the images using a loop
+            $extArray = array('jpeg', 'png', 'jpg', 'gif');
+        
+            if(is_dir($images)){  // Searches the directory and returns a true or false
+                
+                $files = scandir(images);
+                
+                for($i=0; $i<count($files); $i++){  // Grabs a list of files
+                    
+                    if($files[$i] != '.' && $files[$i] != '..'){  // Loops through each item in the directory
+                                               
+                        // Gets and Displays the File Extension
+                        $file = pathinfo($files[$i]);
+                        $ext = $file['extension'];
+                        
+                        // Gets and Displays the Images
+                        if(in_array($ext, $extArray)){
+                            echo "<img src = '$images$files[$i]' <br><br>";
+                        }
+                    }
+                }
+            }
+        
+            $filename = '/var/www/html/images/png';
+        
+            if(!file_exists($filename)){
+                mkdir('/var/www/html/images/png', 0777);
+            }
+    
+        ?>
+    
+    </body>
+</html>
